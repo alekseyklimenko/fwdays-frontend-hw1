@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import {TodoList} from '@/components/Todo/List';
+import TodoFilters from "@/components/Todo/Filters";
 
 export default async function Todos(props: { searchParams: Promise<any> }) {
     const searchParams = await props.searchParams;
@@ -12,6 +13,7 @@ export default async function Todos(props: { searchParams: Promise<any> }) {
             >
                 Create a new todo
             </Link>
+            <TodoFilters searchParams={searchParams} />
             <TodoList searchParams={searchParams} />
         </section>
     );

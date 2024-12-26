@@ -21,7 +21,7 @@ export async function TodoList({ searchParams }: { searchParams: any }) {
     }
 
     return (
-        <section className="w-full max-w-4xl shadow-md rounded-lg mb-8 flex flex-col items-center p-6 bg-gray-50 min-h-screen">
+        <section className="w-full max-w-4xl shadow-md rounded-lg mt-8 flex flex-col items-center p-6 bg-gray-50 min-h-screen">
             <div className="w-full max-w-3xl bg-white shadow-lg rounded-lg overflow-hidden">
                 <Accordion type="single" collapsible className="space-y-4 p-4">
                     <>
