@@ -1,4 +1,5 @@
 "use client";
+
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -13,15 +14,21 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import postTodo from '@/app/todos/actions/postTodo';
+import patchTodo from '@/app/todos/actions/patchTodo';
 import { Priority } from '@/constants/todo';
 
 type Props = {
     todo?: ITodo;
+    isUpdate?: boolean;
 };
 
-export const TodoForm = ({ todo }: Props) => {
+export const TodoForm = ({ todo, isUpdate }: Props) => {
+    const action = isUpdate ? patchTodo : postTodo;
+
+    const dueDateDefVal = todo?.due_date ? todo.due_date.split('T')[0] : '';
+
     return (
-        <form action={postTodo as string} className='max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-lg'>
+        <form action={action as string} className='max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-lg'>
             <input type='hidden' name='id' value={todo?.id} />
 
             <div className='mb-6'>
@@ -58,7 +65,7 @@ export const TodoForm = ({ todo }: Props) => {
                     id='due_date'
                     name='due_date'
                     type='date'
-                    defaultValue={todo?.due_date}
+                    defaultValue={dueDateDefVal}
                     required
                     className='mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500'
                 />
@@ -101,7 +108,7 @@ export const TodoForm = ({ todo }: Props) => {
                 type='submit'
                 className='w-full bg-cyan-700 text-white py-2 px-4 rounded-md shadow-sm hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
             >
-                {'Add'}
+                {isUpdate ? 'Update' : 'Add'}
             </Button>
         </form>
     );
