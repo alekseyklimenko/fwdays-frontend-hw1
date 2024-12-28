@@ -11,7 +11,7 @@ export default async function Todos(props: { searchParams: Promise<any> }) {
                 href='/todos/create'
                 className='inline-block bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-cyan-800 transition-colors duration-200'
             >
-                Create a new todo
+                Create a new Todo
             </Link>
             <TodoFilters searchParams={searchParams} />
             <TodoList searchParams={searchParams} />
