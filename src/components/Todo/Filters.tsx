@@ -19,8 +19,9 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Priority, SortBy } from '@/constants/todo';
 import { useRouter } from 'next/navigation'
+import { ISearchParams } from "@/types/todo";
 
-export function TodoFilters({ searchParams }: { searchParams: any }) {
+export function TodoFilters({ searchParams }: { searchParams: ISearchParams }) {
     const router = useRouter();
 
     const handleReset = () => {

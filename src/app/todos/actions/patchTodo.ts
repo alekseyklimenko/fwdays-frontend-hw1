@@ -10,8 +10,8 @@ export default async function patchTodo(formData: FormData) {
     const cookieStore = await cookies();
     const db = createClient(cookieStore);
 
-    const id = +formData.get('id');
-    if (!id) {
+    const todoId = formData.get('id') ? Number(formData.get('id')) : 0;
+    if (!todoId) {
         throw new Error('Todo ID is missing');
     }
 
@@ -24,7 +24,7 @@ export default async function patchTodo(formData: FormData) {
         updated_at: new Date()
     };
 
-    const { error } = await db.from('todos').update(todoData).eq('id', id);
+    const { error } = await db.from('todos').update(todoData).eq('id', todoId);
 
     if (error) {
         throw new Error(`Failed to update todo: ${error.message}`);

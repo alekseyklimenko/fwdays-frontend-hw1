@@ -9,7 +9,7 @@ export default async function deleteTodo(formData: FormData) {
     const cookieStore = await cookies();
     const db = createClient(cookieStore);
 
-    const todoId = +formData.get('id');
+    const todoId = formData.get('id') ? Number(formData.get('id')) : 0;
 
     if (!todoId) {
         console.warn('Todo ID is missing.');

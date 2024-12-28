@@ -8,12 +8,13 @@ import {
 import deleteTodo from "@/app/todos/actions/deleteTodo";
 import { Button } from "@/components/ui/button";
 import { TodoForm } from "@/components/Todo/Form";
+import { ISearchParams } from "@/types/todo";
 
 const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString();
 }
 
-export async function TodoList({ searchParams }: { searchParams: any }) {
+export async function TodoList({ searchParams }: { searchParams: ISearchParams }) {
     const { data: todos } = await getTodos(searchParams);
 
     if(!todos?.length){
@@ -43,7 +44,7 @@ export async function TodoList({ searchParams }: { searchParams: any }) {
                             </AccordionTrigger>
 
                             <AccordionContent className="p-4 bg-gray-100">
-                                <form action={deleteTodo as string} className="flex items-center justify-between space-x-4">
+                                <form action={deleteTodo} className="flex items-center justify-between space-x-4">
                                     <input type="hidden" name="id" value={todo.id} />
                                     <Button variant="destructive" type="submit">Delete</Button>
                                 </form>

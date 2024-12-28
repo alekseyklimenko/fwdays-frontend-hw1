@@ -1,11 +1,11 @@
 "use server";
 
 import { createClient } from '@/utils/supabase/server';
-import { ITodo } from '@/types/todo';
+import { ISearchParams, ITodo } from '@/types/todo';
 import { cookies } from 'next/headers';
 import { Priority, SortBy } from '@/constants/todo';
 
-export async function getTodos(searchParams: any): Promise<{ data: ITodo[] }> {
+export async function getTodos(searchParams: ISearchParams): Promise<{ data: ITodo[] }> {
     const cookieStore = await cookies();
     const db = createClient(cookieStore);
 
