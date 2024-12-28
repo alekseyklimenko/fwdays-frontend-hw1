@@ -28,7 +28,7 @@ export const TodoForm = ({ todo, isUpdate }: Props) => {
     const dueDateDefVal = todo?.due_date ? todo.due_date.split('T')[0] : '';
 
     return (
-        <form action={action} className='max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-lg'>
+        <form action={action as unknown as string} className='max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-lg'>
             <input type='hidden' name='id' value={todo?.id} />
 
             <div className='mb-6'>
