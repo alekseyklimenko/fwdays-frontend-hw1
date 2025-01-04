@@ -4,14 +4,24 @@ import { createClient } from '@/utils/supabase/server';
 import { ISearchParams, ITodo } from '@/types/todo';
 import { cookies } from 'next/headers';
 import { Priority, SortBy } from '@/constants/todo';
+import {redirect} from "next/navigation";
 
 export async function getTodos(searchParams: ISearchParams): Promise<{ data: ITodo[] }> {
     const cookieStore = await cookies();
     const db = createClient(cookieStore);
 
+    const { data: userResp, error: userErr } = await db.auth.getUser();
+
+    if (userErr || !userResp?.user) {
+        redirect('/login');
+        return;
+    }
+
     let query = db.from('todos').select().order(getSortBy(searchParams.sortBy), { ascending: true });
 
     const priority = getPriority(searchParams.priority);
+
+    query = query.eq('user_id', userResp?.user?.id);
 
     if (priority !== Priority.ANY) {
         query = query.eq('priority', priority);

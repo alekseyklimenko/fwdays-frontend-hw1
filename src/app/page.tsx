@@ -8,9 +8,8 @@ export default function Home() {
                 <h1 className='text-5xl font-extrabold mb-8'>
                     Welcome to the Chapter 1 Homework
                 </h1>
-                <Link href='/todos'>
-                    Go to Todo List
-                </Link>
+                <Link href='/todos'>Go to Todo List</Link>
+                <Link href='/login'>Login</Link>
             </main>
         </div>
     );

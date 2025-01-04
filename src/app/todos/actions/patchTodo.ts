@@ -10,6 +10,13 @@ export default async function patchTodo(formData: FormData) {
     const cookieStore = await cookies();
     const db = createClient(cookieStore);
 
+    const { data: userResp, error: userErr } = await db.auth.getUser();
+
+    if (userErr || !userResp?.user) {
+        redirect('/login');
+        return;
+    }
+
     const todoId = formData.get('id') ? Number(formData.get('id')) : 0;
     if (!todoId) {
         throw new Error('Todo ID is missing');
