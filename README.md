@@ -42,4 +42,6 @@ docker build -t new-app .
 docker run -p 3000:3000 new-app
 
 docker images // list all images
+
+kamal setup
 ```
