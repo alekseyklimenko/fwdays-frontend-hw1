@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "esnext",
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}

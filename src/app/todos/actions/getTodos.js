@@ -1,17 +1,26 @@
 "use server";
 
-import { createClient } from '@/utils/supabase/server';
-import { ISearchParams, ITodo } from '@/types/todo';
+import { createClient } from 'utils/supabase/server';
 import { cookies } from 'next/headers';
-import { Priority, SortBy } from '@/constants/todo';
+import { Priority, SortBy } from 'constants/todo';
+import {redirect} from "next/navigation";
 
-export async function getTodos(searchParams: ISearchParams): Promise<{ data: ITodo[] }> {
+export async function getTodos(searchParams) {
     const cookieStore = await cookies();
     const db = createClient(cookieStore);
+
+    const { data: userResp, error: userErr } = await db.auth.getUser();
+
+    if (userErr || !userResp?.user) {
+        redirect('/login');
+        return;
+    }
 
     let query = db.from('todos').select().order(getSortBy(searchParams.sortBy), { ascending: true });
 
     const priority = getPriority(searchParams.priority);
+
+    query = query.eq('user_id', userResp?.user?.id);
 
     if (priority !== Priority.ANY) {
         query = query.eq('priority', priority);
@@ -33,10 +42,10 @@ export async function getTodos(searchParams: ISearchParams): Promise<{ data: ITo
         throw new Error(`Failed to fetch todos: ${error.message}`);
     }
 
-    return { data: data as ITodo[] };
+    return { data: data };
 }
 
-const getSortBy = (sortBy: SortBy): SortBy => {
+const getSortBy = (sortBy) => {
     switch (sortBy) {
         case SortBy.PRIORITY:
             return SortBy.PRIORITY;
@@ -47,7 +56,7 @@ const getSortBy = (sortBy: SortBy): SortBy => {
     }
 };
 
-const getPriority = (priority: Priority): Priority => {
+const getPriority = (priority) => {
     switch (priority) {
         case Priority.P1:
             return Priority.P1;
@@ -62,13 +71,13 @@ const getPriority = (priority: Priority): Priority => {
     }
 };
 
-const getDueDate = (dueDate: string): Date | null => {
+const getDueDate = (dueDate) => {
     return dueDate && /^\d{4}-\d{2}-\d{2}$/.test(dueDate)
         ? new Date(dueDate)
         : null;
 };
 
-const formatDate = (date: Date): string => {
+const formatDate = (date) => {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');

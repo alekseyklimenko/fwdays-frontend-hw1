@@ -1,34 +1,28 @@
 "use client";
 
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Button } from '@/components/ui/button';
-import { ITodo } from '@/types/todo';
+import { Label } from 'components/ui/label';
+import { Input } from 'components/ui/input';
+import { Textarea } from 'components/ui/textarea';
+import { Checkbox } from 'components/ui/checkbox';
+import { Button } from 'components/ui/button';
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@/components/ui/select';
-import postTodo from '@/app/todos/actions/postTodo';
-import patchTodo from '@/app/todos/actions/patchTodo';
-import { Priority } from '@/constants/todo';
+} from 'components/ui/select';
+import postTodo from 'app/todos/actions/postTodo';
+import patchTodo from 'app/todos/actions/patchTodo';
+import { Priority } from 'constants/todo';
 
-type Props = {
-    todo?: ITodo;
-    isUpdate?: boolean;
-};
-
-export const TodoForm = ({ todo, isUpdate }: Props) => {
+export const TodoForm = ({ todo, isUpdate }) => {
     const action = isUpdate ? patchTodo : postTodo;
 
     const dueDateDefVal = todo?.due_date ? todo.due_date.split('T')[0] : '';
 
     return (
-        <form action={action as unknown as string} className='max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-lg'>
+        <form action={action} className='max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-lg'>
             <input type='hidden' name='id' value={todo?.id} />
 
             <div className='mb-6'>

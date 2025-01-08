@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { TodoList } from '@/components/Todo/List';
-import TodoFilters from "@/components/Todo/Filters";
+import { TodoList } from 'components/Todo/List';
+import TodoFilters from "components/Todo/Filters";
 
-export default async function Todos(props: { searchParams: Promise<never> }) {
+export default async function Todos(props) {
     const searchParams = await props.searchParams;
 
     return (
