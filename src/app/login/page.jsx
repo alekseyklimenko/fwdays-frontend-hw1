@@ -3,17 +3,17 @@
 import {useRef, useState} from "react";
 import {useRouter} from "next/navigation";
 import { login, signup } from './actions';
-import {Label} from "@/components/ui/label";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
+import {Label} from "components/ui/label";
+import {Input} from "components/ui/input";
+import {Button} from "components/ui/button";
 
 export default function LoginPage() {
     const router = useRouter();
 
-    const [error, setError] = useState<string | null>(null);
-    const formRef = useRef<HTMLFormElement>();
+    const [error, setError] = useState(null);
+    const formRef = useRef();
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, action: (formData: FormData) => Promise<void>) => {
+    const handleSubmit = async (event, action) => {
         event.preventDefault();
         setError(null);
         if (!formRef.current) {
@@ -24,7 +24,7 @@ export default function LoginPage() {
             await action(formData);
             router.push('/todos');
         } catch (err) {
-            setError((err as Error).message);
+            setError(err.message);
         }
     };
 

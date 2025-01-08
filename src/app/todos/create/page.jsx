@@ -1,5 +1,5 @@
-import { TodoForm } from "@/components/Todo/Form";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { TodoForm } from "components/Todo/Form";
+import { Card, CardContent, CardHeader, CardTitle } from "components/ui/card";
 
 export default function CreateTodo() {
     return (

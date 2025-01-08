@@ -1,11 +1,10 @@
 "use server";
 
 import { revalidatePath } from 'next/cache';
-import { createClient } from '@/utils/supabase/server';
-import {SignInWithPasswordCredentials} from "@supabase/auth-js/src/lib/types";
+import { createClient } from 'utils/supabase/server';
 import {cookies} from "next/headers";
 
-export async function login(formData: FormData) {
+export async function login(formData) {
     const data = {
         email: formData.get('email')?.toString(),
         password: formData.get('password')?.toString(),
@@ -22,7 +21,7 @@ export async function login(formData: FormData) {
 
     const cookieStore = await cookies();
     const supabase = await createClient(cookieStore);
-    const { error } = await supabase.auth.signInWithPassword(data as SignInWithPasswordCredentials);
+    const { error } = await supabase.auth.signInWithPassword(data);
 
     if (error) {
         throw new Error(error.message);
@@ -31,7 +30,7 @@ export async function login(formData: FormData) {
     revalidatePath('/todos');
 }
 
-export async function signup(formData: FormData) {
+export async function signup(formData) {
     const data = {
         email: formData.get('email')?.toString(),
         password: formData.get('password')?.toString(),
@@ -48,7 +47,7 @@ export async function signup(formData: FormData) {
 
     const cookieStore = await cookies();
     const supabase = await createClient(cookieStore);
-    const { error } = await supabase.auth.signUp(data as SignInWithPasswordCredentials)
+    const { error } = await supabase.auth.signUp(data)
 
     if (error) {
         throw new Error(error.message);

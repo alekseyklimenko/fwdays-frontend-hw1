@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {forwardRef} from 'react';
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 
-const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
+const Card = forwardRef(({ className, ...props }, ref) => (
     <div
         ref={ref}
         className={cn('rounded-xl border bg-card text-card-foreground shadow', className)}
@@ -11,7 +11,7 @@ const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({
 ))
 Card.displayName = 'Card'
 
-const CardHeader = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
+const CardHeader = forwardRef(({ className, ...props }, ref) => (
     <div
         ref={ref}
         className={cn('flex flex-col space-y-2 p-6', className)}
@@ -20,7 +20,7 @@ const CardHeader = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElemen
 ))
 CardHeader.displayName = 'CardHeader'
 
-const CardTitle = forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(({ className, ...props }, ref) => (
+const CardTitle = forwardRef(({ className, ...props }, ref) => (
     <h3
         ref={ref}
         className={cn('font-semibold leading-none tracking-tight', className)}
@@ -29,12 +29,12 @@ const CardTitle = forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHead
 ))
 CardTitle.displayName = 'CardTitle'
 
-const CardContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
+const CardContent = forwardRef(({ className, ...props }, ref) => (
     <div ref={ref} className={cn('p-6 pt-0', className)} {...props} />
 ))
 CardContent.displayName = 'CardContent'
 
-const CardFooter = forwardRef<HTMLDivElement,React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
+const CardFooter = forwardRef(({ className, ...props }, ref) => (
     <div ref={ref} className={cn('flex items-center p-6 pt-0', className)}
         {...props}
     />

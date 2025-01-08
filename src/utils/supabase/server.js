@@ -1,11 +1,10 @@
 
 import { createServerClient } from "@supabase/ssr";
-import {RequestCookies, ResponseCookies} from "next/dist/compiled/@edge-runtime/cookies";
 
-export const createClient = (cookieStore: Omit<RequestCookies, "set" | "clear" | "delete"> & Pick<ResponseCookies, "set" | "delete">) => {
+export const createClient = (cookieStore) => {
     return createServerClient(
-        process.env.SUPABASE_URL!,
-        process.env.SUPABASE_ANON_KEY!,
+        process.env.SUPABASE_URL,
+        process.env.SUPABASE_ANON_KEY,
         {
             cookies: {
                 getAll() {

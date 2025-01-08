@@ -1,20 +1,19 @@
-import { getTodos } from "@/app/todos/actions/getTodos";
+import { getTodos } from "app/todos/actions/getTodos";
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-} from "@/components/ui/accordion";
-import deleteTodo from "@/app/todos/actions/deleteTodo";
-import { Button } from "@/components/ui/button";
-import { TodoForm } from "@/components/Todo/Form";
-import { ISearchParams } from "@/types/todo";
+} from "components/ui/accordion";
+import deleteTodo from "app/todos/actions/deleteTodo";
+import { Button } from "components/ui/button";
+import { TodoForm } from "components/Todo/Form";
 
-const formatDate = (date: string) => {
+const formatDate = (date) => {
     return new Date(date).toLocaleDateString();
 }
 
-export async function TodoList({ searchParams }: { searchParams: ISearchParams }) {
+export async function TodoList({ searchParams }) {
     const { data: todos } = await getTodos(searchParams);
 
     if(!todos?.length){

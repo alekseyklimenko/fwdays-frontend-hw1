@@ -6,22 +6,21 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+} from 'components/ui/card';
+import { Button } from 'components/ui/button';
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@/components/ui/select';
+} from 'components/ui/select';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
-import { Priority, SortBy } from '@/constants/todo';
+import { Priority, SortBy } from 'constants/todo';
 import { useRouter } from 'next/navigation'
-import { ISearchParams } from "@/types/todo";
 
-export function TodoFilters({ searchParams }: { searchParams: ISearchParams }) {
+export function TodoFilters({ searchParams }) {
     const router = useRouter();
 
     const handleReset = () => {
