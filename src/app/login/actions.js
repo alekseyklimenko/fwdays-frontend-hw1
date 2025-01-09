@@ -54,4 +54,5 @@ export async function signup(formData) {
     }
 
     revalidatePath('/todos');
+    return 'Signup successful! Please check your email to verify your account.';
 }
